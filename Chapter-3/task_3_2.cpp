@@ -27,7 +27,7 @@ class Student{
 int main(){
     unsigned int col_students = 0;
     std::vector<Student> student;
-    std::cout << "Enter col students\n:_>";
+    std::cout << "Enter col students\n :_>";
     std::cin >> col_students;
     
     return EXIT_SUCCESS;
