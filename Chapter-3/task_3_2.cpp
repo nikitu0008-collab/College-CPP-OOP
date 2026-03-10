@@ -2,23 +2,24 @@
 #include <string>
 #include <vector>
 class Student{
-    unsigned int age, indetificator;
-    std::string classing = "null", name = "unknown";
+    unsigned int age_, indetificator_;
+    std::string classing_ = "null", name_ = "unknown";
     public:
     void redactorStudents(){
-        std::cin >> indetificator;
-        std::cin >> name;
-        std::cin >> age;
-        std::cin >> classing;
+        std::cout << "indetificator: " << std::endl; std::cin >> indetificator_;
+        std::cout << "name: " << std::endl; std::cin >> name_;
+        std::cout << "age: " << std::endl; std::cin >> age_;
+        std::cout << "class: " << std::endl; std::cin >> classing_;
     }
     void printInformation(){
-            std::cout << "\n.Student #-" << indetificator << std::endl;
-            std::cout << "      " << name << std::endl;
-            std::cout << "      " << age << std::endl;
-            std::cout << "      " << classing << std::endl;
-    }
+            std::cout << "\n.Student #-" << indetificator_ << std::endl;
+            std::cout << "      " << name_ << std::endl;
+            std::cout << "      " << age_ << std::endl;
+            std::cout << "      " << classing_ << std::endl;
+        }
+    //*Destruction.
     ~Student(){
-        std::cout << "Student " << name << "(" << indetificator << ") deleted" << std::endl;
+        std::cout << "Student " << name_ << "(" << indetificator_ << ") deleted" << std::endl;
     }
 };
 int main(){
@@ -27,8 +28,8 @@ int main(){
     std::cin >> col_students;
     std::vector<Student> students(col_students);
     while(answer != 2){
-        for(int i = 0 ; i < col_students ; i++){
-            students[i].printInformation();
+        for(int i = 0 ; i < students.size() ; i++){
+            students[i].printInformation(col_students);
         }
         std::cout << "1. Redactor Student's\n2. Exit\n_>";
         std::cin >> answer;
@@ -40,7 +41,7 @@ int main(){
             break;
             case 2:
             std::cout << "Good bye!" << std::endl;
-            for(int i = 0 ; i < col_students ; i++){
+            for(int i = 0 ; i < students.size() ; i++){
                 students;
             }
             break;
