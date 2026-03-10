@@ -6,12 +6,12 @@
 *I'm using vector for add some cars
 *Using algorithm for std::sort
 */
-class Cars{
+class Car{
     public:
     unsigned int year_, mileage_, power_;
     std::string mark_, country_of_origin_;
     //*It's a constuctor (NO STANDART CONSTRUCTOR)
-    Cars(unsigned int year, unsigned int mileage, unsigned int power, std::string mark, std::string country_of_origin){
+    Car(unsigned int year, unsigned int mileage, unsigned int power, std::string mark, std::string country_of_origin){
         year_ = year; mileage_ = mileage; power_ = power;
         mark_ = mark; country_of_origin_ = country_of_origin;
     }
@@ -30,7 +30,7 @@ int main(){
     std::cout << "Enter col cars: ";
     std::cin >> col_car;
 
-    std::vector<Cars> cars;
+    std::vector<Car> car;
 
     for(int i = 0 ; i < col_car ; i++){        
         unsigned int year_, mileage_, power_;
@@ -43,18 +43,18 @@ int main(){
         std::cout << "Enter power_: "; std::cin >> power_;
 
         //*this is the use of the constructor
-        cars.push_back(Cars(year_, mileage_, power_, mark_, country_of_origin_));
+        car.push_back(Car(year_, mileage_, power_, mark_, country_of_origin_));
     }
-    //*I'm using bubble sort.
-    for (int i = 0; i < col_car - 1; i++) {
-        for (int j = 0; j < col_car - i - 1; j++) {
-            if (cars[j].year_ > cars[j + 1].year_) {
-                std::swap(cars[j], cars[j + 1]);
+    //*I'm using bubble sort. sort in ascending order
+    for (int i = 0; i < car.size() - 1; i++) {
+        for (int j = 0; j < car.size() - i - 1; j++) {
+            if (car.at(j).year_ > car.at(j + 1).year_) {
+                std::swap(car.at(j), car.at(j + 1));
             }
         }
     }
-    for(int i = 0 ; i < cars.size() ; i++){
-        cars[i].print_information();
+    for(int i = 0 ; i < car.size() ; i++){
+        car.at(i).print_information();
     }
     return EXIT_SUCCESS;
 }
