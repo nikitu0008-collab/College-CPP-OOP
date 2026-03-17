@@ -15,7 +15,7 @@ class Car{
         year_ = year; mileage_ = mileage; power_ = power;
         mark_ = mark; country_of_origin_ = country_of_origin;
     }
-        void print_information(){
+        auto print_information() -> void{
             std::cout << "  Car: " << std::endl;
             std::cout << "      " << mark_ << std::endl;
             std::cout << "      manufacture: " << country_of_origin_ << std::endl;
@@ -24,7 +24,7 @@ class Car{
             std::cout << "      mileage_: " << mileage_ << "." << std::endl;
         }
 };
-int main(){
+auto main() -> int{
     unsigned int col_car;
     
     std::cout << "Enter col cars: ";
