@@ -14,7 +14,7 @@
 
 | 🇷🇺 | 🇬🇧 |
 |:---:|:---:|
-| Практические работы по объектно-ориентированному программированию на C++, выполненные в колледже г. Псков. | Practical works on object-oriented programming in C++, completed at the college in Pskov. |
+| Практические работы по объектно-ориентированному программированию на C++, выполненные в колледже г. Сочи. | Practical works on object-oriented programming in C++, completed at the college in Pskov. |
 
 ---
 
