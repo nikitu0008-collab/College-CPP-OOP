@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 #include <print>
-Bed::Bed(){}
+Bed::Bed() : two_tier_(false), col_places_(0), material_("unknown"), seller_(0.0) {}
 Bed::Bed(bool two_tier, unsigned int col_places, std::string material, float seller){
             this->two_tier_ = two_tier;
             this->col_places_ = col_places;
