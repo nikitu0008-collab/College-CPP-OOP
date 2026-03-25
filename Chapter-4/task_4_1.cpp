@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include <print>
-#include <cstdint> //* uint(8, 16, 32)_t
 #include <cstdlib>
 class Bed{
     //*Inisialization
