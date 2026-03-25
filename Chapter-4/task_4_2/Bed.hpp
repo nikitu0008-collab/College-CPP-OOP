@@ -1,4 +1,9 @@
 //*description bed
+#pragma once
+
+#ifndef BED_HPP
+#define BED_HPP
+
 #include <string>
 class Bed{
     private:
@@ -12,3 +17,4 @@ class Bed{
         auto printInformation() -> void;
         auto redactorBed() -> void;
 };
+#endif //* end BED_HPP
