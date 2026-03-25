@@ -1,8 +1,8 @@
 //*description bed
 #pragma once
 
-#ifndef BED_HPP
-#define BED_HPP
+#ifndef BED_HPP //task_4_3
+#define BED_HPP //task_4_3
 
 #include <string>
 class Bed{
@@ -17,4 +17,4 @@ class Bed{
         auto printInformation() -> void;
         auto redactorBed() -> void;
 };
-#endif //* end BED_HPP
+#endif //* end BED_HPP(task_4_3)
