@@ -2,6 +2,7 @@
 #include <iostream>
 #include <print>
 #include <cstdlib>
+#include <sys/types.h>
 #include <vector>
 #include <string>
 class Plate{
@@ -37,10 +38,9 @@ auto main() -> int {
         //*using const to avoid changing the given class of the object
         std::println("\n\t1.add plate\n\t2.delete plate\n\t3.exit\n:_>");
         std::cin >> answer;
-        system("clear");
         switch(answer){
             case 1:
-            std::println("Enter full parametrs.");
+            std::println("Enter full parametrs. (height, width, cost, weidth, seller, material)");
             std::cin >>  hight_new >> width_new >> cost_new >> weidth_new >> seller_new >> material_new >> manufacturer_new;
             //*clangd recomended using emplace_back instead of push_back.
             plate.emplace_back(hight_new,width_new,cost_new,weidth_new,seller_new,material_new,manufacturer_new);
@@ -59,6 +59,9 @@ auto main() -> int {
             for(const auto& i: plate){
                 i.printInformation();
             }
+            break;
+            case 3:
+            std::println("bye...");
             break;
             default:
             throw std::invalid_argument("Errors choice");
