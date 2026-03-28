@@ -27,14 +27,14 @@ auto main() -> int {
     std::string material_new, manufacturer_new;
 
     std::vector<Plate> plate;
+    plate.emplace_back(1, 2, 3, 4, 5, "A", "B");
+    plate.emplace_back(100, 50, 1000, 12, 33, "SUS", "SUGOMA");
+    for(const auto& i : plate){
+        i.printInformation();
+    }
     while(answer != 3){ //*clangd recomended don't using do-while. That's why i'm using cycles while
 
         //*using const to avoid changing the given class of the object
-        plate.emplace_back(1, 2, 3, 4, 5, "A", "B");
-        plate.emplace_back(100, 50, 1000, 12, 33, "SUS", "SUGOMA");
-        for(const auto& i : plate){
-            i.printInformation();
-        }
         std::println("\n\t1.add plate\n\t2.delete plate\n\t3.exit\n:_>");
         std::cin >> answer;
         system("clear");
