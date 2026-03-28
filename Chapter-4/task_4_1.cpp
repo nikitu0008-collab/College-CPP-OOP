@@ -40,17 +40,18 @@ auto main() -> int{
     std::println("[1]Bed customing [2]Bed default\n>_:");
     std::cin >> answer;
     switch(answer){
+        //*The compiler recommends that I use for(int i = ... ; ... ; ...) instead of for(auto& ... : ...)
         case 1:
-        for(size_t i = 0 ; i<bed.size() ; i++){
-            bed[i].redactorBed();
+        for(auto& i : bed){
+            i.redactorBed();
         }
-        for(size_t i = 0 ; i<bed.size() ; i++){
-            bed[i].printInformation();
+        for(auto& i : bed){
+            i.printInformation();
         }
         break;
         case 2:
-        for(size_t i = 0 ; i<bed.size() ; i++){
-            bed[i].printInformation();
+        for(auto& i : bed){
+            i.printInformation();
         }
         break;
         default:
