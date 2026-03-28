@@ -52,10 +52,9 @@ auto main() -> int {
             std::println("enter index: ");
             std::cin >> index;
             //*checking user don't enter index > plate.size()
-            if(index > plate.size()){
+            if(index > plate.size() || index < 0){
                 throw std::invalid_argument("index > size vector");
             }
-            //*plate он пуст а plate1 plate2 заполнены и др тоже
             plate.erase(plate.begin() + index);
             for(const auto& i: plate){
                 i.printInformation();
