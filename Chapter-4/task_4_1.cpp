@@ -42,15 +42,15 @@ auto main() -> int{
     switch(answer){
         //*The compiler recommends that I use for(int i = ... ; ... ; ...) instead of for(auto& ... : ...)
         case 1:
-        for(int& i : Bed){
+        for(Bed& i : bed){
             i.redactorBed();
         }
-        for(int& i : Bed){
+        for(Bed& i : bed){
             i.printInformation();
         }
         break;
         case 2:
-        for(int& i : Bed){
+        for(Bed& i : bed){
             i.printInformation();
         }
         break;
