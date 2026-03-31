@@ -42,16 +42,16 @@ auto main() -> int{
     switch(answer){
         //*The compiler recommends that I use for(int i = ... ; ... ; ...) instead of for(auto& ... : ...)
         case 1:
-        for(size_t i = 0 ; i < bed.size() ; i++){
-            bed.at(i).redactorBed();
+        for(int& i : Bed){
+            i.redactorBed();
         }
-        for(size_t i = 0 ; i < bed.size() ; i++){
-            bed.at(i).printInformation();
+        for(int& i : Bed){
+            i.printInformation();
         }
         break;
         case 2:
-        for(size_t i = 0 ; i < bed.size() ; i++){
-            bed.at(i).printInformation();
+        for(int& i : Bed){
+            i.printInformation();
         }
         break;
         default:
