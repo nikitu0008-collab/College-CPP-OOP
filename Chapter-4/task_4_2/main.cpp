@@ -13,16 +13,16 @@ auto main() -> int{
     std::cin >> answer;
     switch(answer){
         case 1:
-        for(size_t i = 0 ; i < bed.size() ; i++){
-            bed.at(i).redactorBed();
+        for(Bed& i : bed){
+            i.redactorBed();
         }
-        for(size_t i = 0 ; i < bed.size() ; i++){
-            bed.at(i).printInformation();
+        for(Bed& i : bed){
+            i.printInformation();
         }
         break;
         case 2:
-        for(size_t i = 0 ; i < bed.size() ; i++){
-            bed.at(i).printInformation();
+        for(Bed& i : bed){
+            i.printInformation();
         }
         break;
         default:
