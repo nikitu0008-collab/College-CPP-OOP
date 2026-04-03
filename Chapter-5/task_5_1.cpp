@@ -2,7 +2,6 @@
 #include <iostream>
 #include <print>
 #include <cstdlib>
-#include <sys/types.h>
 #include <vector>
 #include <string>
 class Plate{
@@ -30,7 +29,7 @@ auto main() -> int {
     std::vector<Plate> plate;
     plate.emplace_back(1, 2, 3, 4, 5, "A", "B");
     plate.emplace_back(100, 50, 1000, 12, 33, "SUS", "SUGOMA");
-    for(const auto& i : plate){
+    for(Plate const& i : plate){
         i.printInformation();
     }
     while(answer != 3){ //*clangd recomended don't using do-while. That's why i'm using cycles while
@@ -44,7 +43,7 @@ auto main() -> int {
             std::cin >>  hight_new >> width_new >> cost_new >> weidth_new >> seller_new >> material_new >> manufacturer_new;
             //*clangd recomended using emplace_back instead of push_back.
             plate.emplace_back(hight_new,width_new,cost_new,weidth_new,seller_new,material_new,manufacturer_new);
-            for(auto& i : plate){
+            for(const Plate& i : plate){
                 i.printInformation();
             }
             break;
@@ -56,7 +55,7 @@ auto main() -> int {
                 throw std::invalid_argument("index > size vector");
             }
             plate.erase(plate.begin() + index);
-            for(const auto& i: plate){
+            for(const Plate& i: plate){
                 i.printInformation();
             }
             break;
