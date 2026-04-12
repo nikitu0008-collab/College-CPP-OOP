@@ -15,6 +15,10 @@ class Plate{
     auto printInformation() const -> void {
         std::println("Plate is a {}, size(w, h, c): {}, {}, {}; weidth: {}, seller: {}, manufacturer: {}", material_,  width_, hight_, cost_, weidth_, seller_, manufacturer_);
     }
+    ~Plate() { 
+        std::println("Bed manufacturer: {}, Deleted", manufacturer_); 
+    }
+
     protected:
     float hight_, width_, cost_, weidth_, seller_;
     std::string material_, manufacturer_;
@@ -60,7 +64,7 @@ auto main() -> int {
             }
             break;
             case 3:
-            std::println("bye...");
+            //*Call destruction.
             break;
             default:
             throw std::invalid_argument("Errors choice");
