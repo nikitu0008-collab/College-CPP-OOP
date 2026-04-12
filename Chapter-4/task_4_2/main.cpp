@@ -6,10 +6,10 @@
 #include "Bed.hpp"
 auto main() -> int{
     unsigned int col_bad, answer;
-    std::println("col pad: ");
+    std::print("col pad: ");
     std::cin >> col_bad;
     std::vector<Bed> bed(col_bad);
-    std::println("[1]Bed customing [2]Bed default\n>_:");
+    std::print("[1]Bed customing [2]Bed default\n>_:");
     std::cin >> answer;
     switch(answer){
         case 1:
