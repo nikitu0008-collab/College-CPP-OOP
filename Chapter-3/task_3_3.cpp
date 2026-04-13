@@ -1,5 +1,6 @@
 #include <string>
 #include <print>
+#include <cstdlib>
 class Planet{
     private:
     unsigned int mass_, col_sputnik_;
