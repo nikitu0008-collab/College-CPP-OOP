@@ -12,7 +12,7 @@ class Plate{
     //*It's constructor full parametrs
     Plate(float hight, float width, float cost, float weidth, float seller, std::string material, std::string manufacturer) : hight_(hight), width_(width), cost_(cost), weidth_(weidth), seller_(seller), material_(material), manufacturer_(manufacturer){}
     
-    auto printInformation() const -> void {
+    auto printInformation() const noexcept -> void {
         std::println("Plate is a {}, size(w, h, c): {}, {}, {}; weidth: {}, seller: {}, manufacturer: {}", material_,  width_, hight_, cost_, weidth_, seller_, manufacturer_);
     }
     ~Plate() { 
