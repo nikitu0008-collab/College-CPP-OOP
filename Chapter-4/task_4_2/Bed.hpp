@@ -14,7 +14,7 @@ class Bed{
     public:
         Bed();
         Bed(bool two_tier, unsigned int col_places, std::string material, float seller);
-        auto printInformation() -> void;
+        auto printInformation() const noexcept -> void;
         auto redactorBed() -> void;
 };
 #endif //* end BED_HPP(task_4_3)

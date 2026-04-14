@@ -1,12 +1,13 @@
 //*main.cpp request col bad, work multitude bad.
 #include <iostream>
 #include <print>
+#include <stdexcept>
 #include <vector>
-#include <cstdlib> //* return EXIT_...
+#include <cstdlib>
 #include "Bed.hpp"
 auto main() -> int{
     unsigned int col_bad, answer;
-    std::print("col pad: ");
+    std::print("col bad: ");
     std::cin >> col_bad;
     std::vector<Bed> bed(col_bad);
     std::print("[1]Bed customing [2]Bed default\n>_:");
@@ -16,12 +17,12 @@ auto main() -> int{
         for(Bed& i : bed){
             i.redactorBed();
         }
-        for(Bed& i : bed){
+        for(const Bed& i : bed){
             i.printInformation();
         }
         break;
         case 2:
-        for(Bed& i : bed){
+        for(const Bed& i : bed){
             i.printInformation();
         }
         break;

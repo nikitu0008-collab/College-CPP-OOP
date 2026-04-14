@@ -10,7 +10,7 @@ Bed::Bed(bool two_tier, unsigned int col_places, std::string material, float sel
             this->material_ = material;
             this-> seller_ = seller;
         }
-auto Bed::printInformation() -> void{
+auto Bed::printInformation() const noexcept -> void{
             std::println("\nBed: ");
             std::println("    Two_tier: {}", two_tier_);
             std::println("    col places: {}",col_places_);
