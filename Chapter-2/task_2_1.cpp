@@ -4,10 +4,10 @@ struct Person {
 	std::string name, familiya, zodiac;
 	int day, month, year;
 };
-void dataPerson(Person& person) {
+auto dataPerson(Person& person) -> void {
 	std::cin >> person.name >> person.familiya >> person.day >> person.month >> person.year;	
 }
-int main() {
+auto main() -> int {
 	Person person;
 	std::string name, familiya, zodiac;
 	int day = 0, month = 0, year = 0;
