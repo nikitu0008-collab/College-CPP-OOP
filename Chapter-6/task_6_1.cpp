@@ -73,5 +73,5 @@ auto main() -> int {
         i.printInfo();
     }
     return EXIT_SUCCESS;
-}
+    }
 }
