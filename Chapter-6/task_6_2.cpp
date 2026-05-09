@@ -12,9 +12,6 @@ class Company{
     Company() : answer_state_("unknown-state"), name_{"unknown-name"}, income_(0), expenses_(0) {}
 
     [[nodiscard]] auto getName() const -> std::string{
-        if(name_.empty()){
-            std::cerr << "your name empty" << std::endl;
-        }
         return name_;
     }
     [[nodiscard]] auto getState() const -> std::string{
@@ -59,8 +56,11 @@ class Company{
     auto setExpenses(unsigned int expenses) -> Company& { expenses_ = expenses; return *this;}
 
     auto redactorCompany() -> void {
-        std::print("Enter new name, income and expenses: ");
-        std::cin >> name_ >> income_ >> expenses_;
+        std::print("Enter new name: ");
+        std::cin.ignore(1024, '\n');
+        std::getline(std::cin, name_);
+        std::print("Enter new income and expenses: ");
+        std::cin >> income_ >> expenses_;
         try{
         if(income_ < 0 or expenses_ < 0) { throw std::runtime_error("Income or expenses <= 0"); }
         }catch(const std::exception& e){
@@ -75,7 +75,6 @@ class Company{
 
 auto main() -> int {
     uint16_t answer = 0, index = 0;
-    int result = 0;
     std::string answer_state, name; 
     unsigned int income = 0, expenses = 0;
     std::vector<Company> company = {
@@ -94,7 +93,7 @@ auto main() -> int {
                 if(i.getState() == "state"){
                     std::println("State: {}\n\tName:{}\n\tIncome: hidden\n\tExpenses: hidden", i.getState(), i.getName());
                 } else {
-                    std::println("State: {}\n\tnameCompany:{}\n\tIncome:{}\n\tExpenses:{}",
+                    std::println("State: {}\n\tName:{}\n\tIncome:{}\n\tExpenses:{}",
                         i.getState(), i.getName(), i.getIncome(), i.getExpenses()
                     );
                 }
@@ -127,8 +126,9 @@ auto main() -> int {
             }
 
             std::println("Enter name: ");
-            std::getline(std::cin, name);
             std::cin.ignore(1024, '\n');
+            std::getline(std::cin, name);
+            
             std::println("Enter income and expenses: ");
             std::cin >> income >> expenses;
 
