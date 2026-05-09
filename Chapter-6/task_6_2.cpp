@@ -5,21 +5,56 @@
 #include <vector>
 #include <cstdint>
 #include <exception>
+#include <stdexcept>
 class Company{
     public:
-    //*Construction
     Company(std::string answer_state, std::string name,unsigned int income,unsigned int expenses) : answer_state_(answer_state), name_(name), income_(income), expenses_(expenses) {}
     Company() : answer_state_("unknown-state"), name_{"unknown-name"}, income_(0), expenses_(0) {}
 
-    //*Get
-    [[nodiscard]] auto getState() const -> const std::string& { return answer_state_; }
-    [[nodiscard]] auto getName() const -> const std::string& { return name_; }
-    [[nodiscard]] auto getIncom() const -> unsigned int { return income_; }
-    [[nodiscard]] auto getExpenses() const -> unsigned int { return expenses_; }
-    
-    //*Set. I'm creating optimal setter, recomended from teacher
-    auto setState(std::string& answer_state) -> Company& { answer_state_ = answer_state; return *this;}
-    auto setName(std::string& name) -> Company& { name_ = name; return *this;}
+    [[nodiscard]] auto getName() const -> std::string{
+        if(name_.empty()){
+            std::cerr << "your name empty" << std::endl;
+        }
+        return name_;
+    }
+    [[nodiscard]] auto getState() const -> std::string{
+        if(answer_state_ == "state"){
+            return "state";
+        } else if(answer_state_ == "private"){
+            return "private";
+        } else throw std::runtime_error("state error");
+    }
+    [[nodiscard]] auto getIncome() const -> long double {
+        if(answer_state_ == "state"){
+            return 0;
+        } else if(answer_state_ == "private" and income_ < 5000000){
+            return 0;
+            } else {
+                return income_;
+            }
+    }
+    [[nodiscard]] auto getExpenses() const -> long double{
+        if(answer_state_ == "state"){
+            return 0;
+        } else if(answer_state_ == "private" and income_ < 5000000){
+            return 0;
+        } else {
+            return expenses_;
+        }
+    }
+    //чистая прибыль
+    [[nodiscard]] auto getNetProfit() const -> long double{
+        if(answer_state_ == "state"){
+            return 0;
+        } else {
+        return income_ - expenses_; 
+            }
+    }
+    //оборот
+    [[nodiscard]] auto getTurnover() const -> long double{
+        return income_ + expenses_; 
+    } 
+    auto setName(std::string name) -> Company& { name_ = name; return *this;}
     auto setIncome(unsigned int income) -> Company& { income_ = income; return *this;}
     auto setExpenses(unsigned int expenses) -> Company& { expenses_ = expenses; return *this;}
 
@@ -27,7 +62,7 @@ class Company{
         std::print("Enter new name, income and expenses: ");
         std::cin >> name_ >> income_ >> expenses_;
         try{
-        if(income_ <= 0 or expenses_ <= 0) { throw "Income or expenses <= 0"; }
+        if(income_ < 0 or expenses_ < 0) { throw std::runtime_error("Income or expenses <= 0"); }
         }catch(const std::exception& e){
             std::println("{}", e.what());
         }
@@ -54,29 +89,19 @@ auto main() -> int {
         std::cin >> answer;
         switch(answer){
             case 1:
-            if(company.empty()){ std::println("vector empty"); continue; }
+            if(company.empty()){ std::println("vector company empty"); continue; }
             for(const Company& i : company){
-                if(i.getState() == "private" and i.getIncom() < 5000000){
-                    std::println("\nStatus: {}\nName-hidden\nIncome: {}\nExpeses: {}", i.getState(), i.getIncom(), i.getExpenses());
-                } else if(i.getState() == "private" and i.getIncom() > 499999){
-                    std::println("\nStatus: {}\nName: {}\nIncome: {}\nExpeses: {}", i.getState(), i.getName(), i.getIncom(), i.getExpenses());
-                } else if(i.getState() == "state"){
-                    if(i.getIncom() < 5000000){
-                        std::println("\nStatus: {}\nName company: {}\n Income: hidden\nExpeses: hiddden", i.getState(),i.getName());        
-                    } else if(i.getIncom() >= 5000000){
-                            std::println("\nStatus: {}\nName company: {}\nIncome: {}\nExpenses: {}", i.getState(), i.getName(), i.getIncom(), i.getExpenses());
-                        }
-                } else if(i.getState() == "unknown-state"){
-                        std::cerr << "unknown-state" << std::endl;
-                        continue;
-                    } else {
-                        std::cerr << "Error state" << std::endl;
-                        continue;
-                    }
+                if(i.getState() == "state"){
+                    std::println("State: {}\n\tName:{}\n\tIncome: hidden\n\tExpenses: hidden", i.getState(), i.getName());
+                } else {
+                    std::println("State: {}\n\tnameCompany:{}\n\tIncome:{}\n\tExpenses:{}",
+                        i.getState(), i.getName(), i.getIncome(), i.getExpenses()
+                    );
+                }
             }
             break;
             case 2:
-            if(company.empty()){std::println("vector empty"); continue; }
+            if(company.empty()){std::println("vector company empty"); continue; }
             std::print("Enter index redactor: ");
             std::cin >> index;
             if(index >= company.size()){
@@ -98,11 +123,14 @@ auto main() -> int {
             } else if (answer_state == "Private" or answer_state == "private") {
                 answer_state = "private";
             } else {
-                answer_state = "unknown-state";
+                throw std::runtime_error("unknown state");
             }
 
-            std::println("Enter name, income, expenses:");
-            std::cin >> name >> income >> expenses;
+            std::println("Enter name: ");
+            std::getline(std::cin, name);
+            std::cin.ignore(1024, '\n');
+            std::println("Enter income and expenses: ");
+            std::cin >> income >> expenses;
 
             company.emplace_back(answer_state, name, income, expenses);
             break;
@@ -123,10 +151,11 @@ auto main() -> int {
                     //forbidden -- запрещено(перевод)
                     std::println("Calculation forbidden");
                     continue;
+                } if(i.getState() == "private"){
+                    std::println("Company: {}, calculation: {}",i.getName(), i.getIncome() - i.getExpenses());
+                } else {
+                    throw std::runtime_error("Invalid state");
                 }
-                //clangd recomendent const int result. Но я не хочу, потому что результат всё равно будет менятся при новых знач.
-                result = i.getIncom() - i.getExpenses(); 
-                std::println("Company: {}, calculation: {}", i.getName(), result);       
             }
             break;
             case 6:
@@ -137,8 +166,3 @@ auto main() -> int {
         }
     return EXIT_SUCCESS;
 }
-/*
-*У меня вместо unsigned я поставил int т.к рассходов может быть больше чем доходы
-*и мы заметим разницу. т.к если бы unsigned то всегда было бы 0 и не < 0
-*Но если надо, то будет unsigned тоесть(uint16_t)
-*/
