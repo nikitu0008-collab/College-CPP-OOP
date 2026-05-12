@@ -85,9 +85,9 @@ auto main() -> int {
     std::string answer_state, name; 
     unsigned int income = 0, expenses = 0;
     std::vector<Company> company = {
-        Company("private", "Shnele", 499999, 1000875),
-        Company("state", "AGY-AGY", 1000, 190002),
-        Company("private", "NVIM", 11, 11),
+        Company("private", "A", 499999, 1000555),
+        Company("state", "B", 1000, 1000000),
+        Company("private", "C", 10, 15),
         Company("state","A",5000001,5000010)
     };
     while(answer != 6){
