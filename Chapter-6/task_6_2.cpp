@@ -174,8 +174,3 @@ auto main() -> int {
         }
     return EXIT_SUCCESS;
 }
-/*ИСПРАВИТЬ:
- *  1.Убрать выделение целой строки исправить под bool
- *  2.исправить runtime_error
- *  3.long double на std::string
- */
