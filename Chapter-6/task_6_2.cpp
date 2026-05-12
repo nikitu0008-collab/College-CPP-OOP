@@ -19,32 +19,35 @@ class Company{
             return "state";
         } else if(answer_state_ == "private"){
             return "private";
-        } else throw std::runtime_error("state error");
-    }
-    [[nodiscard]] auto getIncome() const -> long double {
-        if(answer_state_ == "state"){
-            return 0;
-        } else if(answer_state_ == "private" and income_ < 5000000){
-            return 0;
-            } else {
-                return income_;
+        } else { 
+            throw std::runtime_error("state error");
             }
     }
-    [[nodiscard]] auto getExpenses() const -> long double{
+
+    [[nodiscard]] auto getIncome() const -> std::string {
         if(answer_state_ == "state"){
-            return 0;
+            return "hidden";
         } else if(answer_state_ == "private" and income_ < 5000000){
-            return 0;
+            return "hidden";
+            } else {
+                return std::to_string(income_);
+            }
+    }
+    [[nodiscard]] auto getExpenses() const -> std::string{
+        if(answer_state_ == "state"){
+            return "hidden";
+        } else if(answer_state_ == "private" and income_ < 5000000){
+            return "hidden";
         } else {
-            return expenses_;
+            return std::to_string(expenses_);
         }
     }
     //чистая прибыль
-    [[nodiscard]] auto getNetProfit() const -> long double{
+    [[nodiscard]] auto getNetProfit() const -> std::string{
         if(answer_state_ == "state"){
-            return 0;
+            return "hidden";
         } else {
-        return income_ - expenses_; 
+            return std::to_string(income_ - expenses_); 
             }
     }
     //оборот
@@ -72,7 +75,17 @@ class Company{
         std::string answer_state_, name_;
         unsigned int income_, expenses_;
 };
-
+static auto checkState(std::vector<Company>& company)->bool{
+    for(const Company& i : company){
+        if(i.getState() == "state"){
+            return true;
+        } else if(i.getState() == "private"){
+            return false;
+        } else {
+            throw std::runtime_error("Error check state");
+        }
+    }
+}
 auto main() -> int {
     uint16_t answer = 0, index = 0;
     std::string answer_state, name; 
@@ -90,7 +103,7 @@ auto main() -> int {
             case 1:
             if(company.empty()){ std::println("vector company empty"); continue; }
             for(const Company& i : company){
-                if(i.getState() == "state"){
+                if(checkState(company)){
                     std::println("State: {}\n\tName:{}\n\tIncome: hidden\n\tExpenses: hidden", i.getState(), i.getName());
                 } else {
                     std::println("State: {}\n\tName:{}\n\tIncome:{}\n\tExpenses:{}",
@@ -110,13 +123,8 @@ auto main() -> int {
             company.at(index).redactorCompany();
             break;
             case 3:
-            try {
             std::println("state or private company?");
             std::cin >> answer_state;
-            } catch (const std::exception& e) {
-                std::cerr << "Error: " << e.what() << std::endl;
-                break;
-            }
             if (answer_state == "State" or answer_state == "state") {
                 answer_state = "state";
             } else if (answer_state == "Private" or answer_state == "private") {
@@ -147,12 +155,12 @@ auto main() -> int {
             case 5:
             if(company.empty()){std::println("vector empty"); continue; }
             for(const Company& i : company){
-                if(i.getState() == "state"){
+                if(checkState(company)){
                     //forbidden -- запрещено(перевод)
                     std::println("Calculation forbidden");
                     continue;
-                } if(i.getState() == "private"){
-                    std::println("Company: {}, calculation: {}",i.getName(), i.getIncome() - i.getExpenses());
+                } else if(!checkState(company)){
+                    std::println("Company: {}, calculation: {}",i.getName(), i.getNetProfit());
                 } else {
                     throw std::runtime_error("Invalid state");
                 }
@@ -166,3 +174,8 @@ auto main() -> int {
         }
     return EXIT_SUCCESS;
 }
+/*ИСПРАВИТЬ:
+ *  1.Убрать выделение целой строки исправить под bool
+ *  2.исправить runtime_error
+ *  3.long double на std::string
+ */
