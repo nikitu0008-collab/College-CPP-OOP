@@ -17,7 +17,6 @@ class DynamicClass{
                 arr_ = new int16_t[*src.size_];
                 size_ = new int16_t[*src.size_];
             
-                //copy elements vector
                 for(size_t i = 0 ; i < *size_ ; i++){
                     arr_[i] = src.arr_[i];
                 }
