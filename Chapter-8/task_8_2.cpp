@@ -3,62 +3,59 @@
 #include <cstdint>
 #include <string>
 #include <vector>
-#include <random>
 
 class Enemy{
     public:
-    //Constructor default
-    Enemy() 
-        : name_("unknown-name"), surname_("unknown-surname"), health_(0), damage_(0) {}
-    
-    //Constructor the parametrs
-    Enemy(std::string name, std::string surname, uint16_t health, uint16_t damage)
-        : name_(name), surname_(surname), health_(health), damage_(damage) {}
-
-    //Method
+      Enemy() : health_((2 + (rand() % 10)) * multiplier_), damage_((1 + (rand() % 5)) * multiplier_) {
+        static const std::vector<std::string> nameVector_ = {
+            "Nikita", "Zip", "Git", "C"
+        };
+        static const std::vector<std::string> surnameVector_ = {
+            "Pablo", "Hub", "Ka", "pp"
+        };
+        name_ = nameVector_[rand() % 4];
+        surname_ = surnameVector_[rand() % 4];
+      }
     constexpr auto printInfo() const noexcept -> void {
         std::println(
-            "Modificator: {}\n",
-            "{} {}    Health: {}    Damage: {}",
-            multiplier_, name_, surname_, health_, damage_
+            "{} {}    Health: {}    Damage: {}\n",
+            name_, surname_, health_, damage_
         );
     }
 
-    static auto getMultiplier() -> uint16_t { return multiplier_; }
+    static auto getMultiplier() -> float { return multiplier_; }
 
-    static auto increaseMultiplier(uint16_t number) -> void{
-        multiplier_ =+ number;
+    static auto increaseMultiplier(float number) -> void{
+        multiplier_ += number;
     }
     private:
     std::string name_, surname_;
     uint16_t health_, damage_;
-    static uint16_t multiplier_;
+    static float multiplier_;
 };
-uint16_t Enemy::multiplier_ = 0;
+
+float Enemy::multiplier_ = 1;
+
 auto main()->int{
-    const std::vector<std::string> name = {"Nikita", "ZIP", "GIT"};
-    const std::vector<std::string> surname = {"PABLO", "HUB", "KA"};
-
     std::vector<Enemy> enemy(4);
-    srand(time(0));
-    enemy.emplace_back(
-        name.at(rand() % name.size()), 
-        surname.at(rand() % surname.size()), 
-        2 + rand() % 10 * Enemy::getMultiplier(),
-        1 + rand() % 5 * Enemy::getMultiplier()
-    );
 
+    std::println("===ADDING 4 ELEMENTS===");
+    
     std::println("Modificator: {}", Enemy::getMultiplier());
     for(const Enemy& i : enemy){
         i.printInfo();
     }
-
-    enemy.clear();
     
-    Enemy::increaseMultiplier(10);
-    enemy.resize(5);
-    std::println("Modificator: {}", Enemy::getMultiplier()); 
+    enemy.clear();
+    std::println("===CLEAR===");
 
+    Enemy::increaseMultiplier(10);
+    std::println("===ADDING===");
+
+    enemy.resize(5);
+    std::println("===RESIZE===");
+
+    std::println("Modificator: {}", Enemy::getMultiplier()); 
     for(const Enemy& i : enemy){
         i.printInfo();
     }
