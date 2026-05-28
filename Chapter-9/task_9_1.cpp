@@ -18,7 +18,7 @@ class Robot{
     constexpr auto printInfo() noexcept -> void{
         std::cout << "I'm: " << this << ", my coordinates: " << x << ", " << y << std::endl;
     }
-    auto move(int cord_1) -> Robot&{
+    auto move(int16_t cord_1) -> Robot&{
         std::println(
                 "I'm moving {}, don't saying where, i choise my self\n",
                 "choise coordinate.. {}, Choise moving.. {}",
@@ -27,7 +27,7 @@ class Robot{
         x = cord_1;
         return *this;
     }
-    auto move(int cord_1, int cord_2) -> Robot&{
+    auto move(int16_t cord_1, int16_t cord_2) -> Robot&{
         std::cout << "Saying moving this coordinate: " << cord_1 << ", " << cord_2 << std::endl; 
         x = cord_1; 
         y = cord_2;
@@ -36,8 +36,8 @@ class Robot{
     auto move(std::string objects) -> Robot&{
         uint16_t objects_int = 0;
         if(objects == "Biba"){ objects_int = 1; }
-            else if(objects == "SUS"){ objects_int = 2; }
-                else { objects_int = 0; }
+        else if(objects == "SUS"){ objects_int = 2; }
+        else { objects_int = 0; }
         switch(objects_int){
         case 1:
         std::println("I was tald to move {}. I can do it", objects);
